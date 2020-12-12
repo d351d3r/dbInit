@@ -1,4 +1,3 @@
-
 class review_source(object):
     name = ""
     url = ""
