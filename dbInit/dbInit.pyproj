@@ -25,10 +25,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="dbInit.py" />
+    <Compile Include="neural.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="review.py" />
     <Compile Include="web_parse.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+    <Folder Include="data\models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\models\fasttext-social-network-model.bin" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

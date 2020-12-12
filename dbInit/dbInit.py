@@ -8,9 +8,12 @@ import os
 import glob
 from review import review, review_source
 import web_parse
+import json
+import neural
+from types import SimpleNamespace
 
 def post(reviews_list):
-    url = 'http://localhost:58844/api/review/'
+    url = 'http://localhost:60026/api/review/'
 
     pattern = r'(\\x[0-9,a-f]{2})'
 
@@ -21,25 +24,31 @@ def post(reviews_list):
         st = re.sub(pattern,' ',second)
 
         print(it.text)
-        #print(st)
+        
         resp = requests.post(url, headers = {'Content-Type':'application/json'}, data=st.encode('utf-8'))
         print("Resp: %s" % resp)
 
 
-#tuple = web_parse.parse_web_irec()
+tuple = web_parse.parse_web_irec()
 
-#reviews_list = tuple[0]
-#texts = tuple[1]
+print("\n\nWeb's been parsed")
+
+reviews_list = tuple[0]
+texts = tuple[1]
 
 #s = review_source()
 #s.name = "irecommend.ru"
 #s.url = 'https://irecommend.ru/content/rzhd'
-from io import StringIO
-io = StringIO()
-reviews_list = ["sfhdiugfjdigjf", "dfuyegrhowisjne", "dbufhgjdiopfl"]
-str = json.dumps(reviews_list)
+str = json.dumps(texts)
 
-#post(reviews_list)
+#marks_list = json.loads(str, object_hook=lambda d: SimpleNamespace(**d))
+
+marks_list = neural.predict(texts)
+
+for it in range(0, len(marks_list)):
+    reviews_list[it].sence = marks_list[it]
+
+post(reviews_list)
 
 
     

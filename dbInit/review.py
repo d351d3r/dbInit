@@ -7,6 +7,7 @@ class review(object):
     source  = 0 
     url = ""
     sence  = 0
+    date = ""
 
 
 
